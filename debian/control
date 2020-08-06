@@ -1,0 +1,24 @@
+Source: ptouch-driver
+Maintainer: Debian Printing Team <debian-printing@lists.debian.org>
+Uploaders: Didier Raboud <odyx@debian.org>
+Section: text
+Priority: optional
+Build-Depends: debhelper-compat (= 13),
+               libcups2-dev,
+               libcupsimage2-dev,
+               libxml-libxml-perl,
+               foomatic-db-engine (>= 4.0.13-5),
+               pyppd
+Standards-Version: 4.5.0
+Vcs-Browser: https://salsa.debian.org/printing-team/ptouch-driver
+Vcs-Git: https://salsa.debian.org/printing-team/ptouch-driver.git
+Homepage: https://github.com/philpem/printer-driver-ptouch
+
+Package: printer-driver-ptouch
+Architecture: any
+Depends: ${shlibs:Depends},
+         ${misc:Depends},
+         ghostscript
+Description: printer driver Brother P-touch label printers
+ The ptouch driver is an open source driver for the Brother P-touch label
+ printers, from the QL-* and PT-* series.

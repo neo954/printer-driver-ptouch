@@ -1,0 +1,43 @@
+From: Andreas Gruenbacher <agruenba@redhat.com>
+Date: Sun, 12 Apr 2020 00:01:14 +0200
+Subject: Get rid of PageSize rounding
+
+Until January 31, 2020, the foomatic parser didn't recognize values with
+fractional numbers like "9.6 2834.65" in PageSize values, so we were rounding
+here.  With the fix from here:
+
+  https://github.com/OpenPrinting/foomatic-db-engine/commit/75de02d
+
+we can get rid of the rounding in ptouch-driver, and the page sizes will be a
+lot more accurate.
+---
+ foomaticalize | 16 ----------------
+ 1 file changed, 16 deletions(-)
+
+diff --git a/foomaticalize b/foomaticalize
+index bedb129..e3bad19 100755
+--- a/foomaticalize
++++ b/foomaticalize
+@@ -198,22 +198,6 @@ sub transform($) {
+ 		$printer->appendChild($id);
+ 	    }
+ 	}
+-	foreach my $option ($dom->findnodes('/option')) {
+-	    next unless $option->findvalue('./arg_shortname/en') eq 'PageSize';
+-	    foreach my $enum ($option->findnodes('./enum_vals/enum_val')) {
+-		foreach my $driverval ($enum->findnodes('./ev_driverval')) {
+-		    # Until January 31, 2020, the foomatic parser didn't
+-		    # recognize values with fractional numbers like
+-		    # "9.6 2834.65" in PageSize values.  Until that fix is
+-		    # available widely enough, round the numbers.
+-		    if ($driverval->textContent =~
+-			/^\s*(\d+(?:\.\d+)?)\s+(\d+(?:\.\d+)?)\s*$/) {
+-			$driverval->removeChildNodes();
+-			$driverval->appendText(round($1) . ' ' . round($2));
+-		    }
+-		}
+-	    }
+-	}
+     }
+ }
+ 
