@@ -1,4 +1,4 @@
-ptouch-driver (1.5.1-2) unstable; urgency=medium
+ptouch-driver (1.5.1-2~bpo10+1) unstable; urgency=medium
 
   * Drop unneeded cups/ppd.h patch
   * Refresh d/copyright
@@ -7,7 +7,7 @@ ptouch-driver (1.5.1-2) unstable; urgency=medium
 
  -- Didier Raboud <odyx@debian.org>  Wed, 27 May 2020 21:44:13 +0200
 
-ptouch-driver (1.5.1-1) unstable; urgency=medium
+ptouch-driver (1.5.1-1~bpo10+1) unstable; urgency=medium
 
   * New 1.5.1 upstream version
 
